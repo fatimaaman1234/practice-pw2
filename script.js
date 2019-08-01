@@ -73,7 +73,7 @@ let videos = [
     title: "Mathematics tutorials ",
     lengthInMinutes: 2,
     category: "Educational",
-    uploadDate: new Date("01-5-2018"),
+    uploadDate: new Date("08-1-2019"),
     tags: "mathlers, mindgame, , expert",
     features: ["360°", "HD"],
     viewCount: 50,
@@ -113,7 +113,7 @@ let videos = [
     title: "Shahveer Jaffery Vlogs",
     lengthInMinutes: 10,
     category: "Comedy",
-    uploadDate: new Date("04-28-2018"),
+    uploadDate: new Date("08-4-2019"),
     tags: "funny, laughter",
     features: ["repeat", "360°", "HD"],
     viewCount: 4600,
@@ -140,14 +140,31 @@ let videos = [
 // Uploaded On: 22-July-2019
 // Rating: 
 
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+]
+
 
 for (i = 0; i < videos.length; i++) {
+  let date = videos[i].uploadDate;
   console.log("Title: " + videos[i].title);
   console.log("Lenght: " + videos[i].lengthInMinutes);
   console.log("Category: " + videos[i].category);
   console.log("Views: " + videos[i].viewCount);
-  console.log("Uploaded On: " + videos[i].uploadDate);
+  console.log("Uploaded On: " + date.getDate() + "-" + months[date.getMonth()] + "-" + date.getFullYear());
   console.log("Rating: " + videos[i].rating);
+  console.log("");
 }
 
 console.log("");
@@ -194,8 +211,26 @@ console.log("");
 
 // Print title of the longest video
 
+let maxLength = 0;
+let longestVideo;
 
+for (let i = 0; i < videos.length; i++) {
+  if (maxLength < videos[i].lengthInMinutes) {
+    maxLength = videos[i].lengthInMinutes;
+    longestVideo = videos[i].title;
+  }
+}
+console.log(longestVideo + " is the longest video")
+console.log("");
 
+videos.forEach(function (clip) {
+  if (maxLength < clip.lengthInMinutes) {
+    maxLength = clip.lengthInMinutes;
+    longestVideo = clip.title;
+  }
+});
+console.log(longestVideo + " is the longest video")
+console.log("");
 
 
 
@@ -214,32 +249,96 @@ console.log("");
 
 // Print titles of all videos with tag "Javascript"
 
-for (i = 0; i < videos.length; i++) {
-  if (videos[i].tags.charAt(0) === "J") {
-    console.log(videos[i].title);
-  }
-}
+// for (i = 0; i < videos.length; i++) {
+//   let arraysOftages = videos[i].tags.split(", ");
+//   if (arraysOftages[i] === "javascript") {
+//     console.log(videos[i].title);
+//   }
+// }
 
+// console.log("");
+
+
+videos.forEach(function (video) {
+  let arraysOftages = video.tags.split(", ");
+  for (i = 0; i < arraysOftages.length; i++) {
+    if (arraysOftages[i] === "javascript") {
+      console.log(video.title);
+    }
+  }
+})
+console.log("");
+
+// Print titles of all videos with HD feature
+videos.forEach(function (video) {
+
+  for (i = 0; i < video.features.length; i++) {
+    if (video.features[i] === "HD") {
+      console.log(video.title);
+    }
+  }
+})
+console.log("");
+
+// Print titles of all videos uploaded today
+
+let videoDate;
+let videoMonth;
+let videoYear;
+let today = new Date().getDate();
+let thisMonth = new Date().getMonth();
+let thisYear = new Date().getFullYear();
+
+videos.forEach(function (clip) {
+  videoDate = clip.uploadDate.getDate();
+  videoMonth = clip.uploadDate.getMonth();
+  videoYear = clip.uploadDate.getFullYear();
+  if (today == videoDate && thisMonth == videoMonth && thisYear == videoYear) {
+    console.log(clip.title);
+  }
+});
 console.log("");
 
 
-// Print titles of all videos uploaded today
-let uploadedDay = videos[i].uploadDate.getDay;
-let todayDate = new Date(27-7-2019).getDay;
-for (i = 0; i < videos.length; i++) {
- let uploadedDay = videos[i].uploadDate.getDay;
-  let todayDate = new Date(27-7-2019).getDay; 
-  if (uploadedDay == todayDate) {
-    console.log(videos[i].title);
-  }
-}
-
-console.log("")
-
 
 // Print titles of all videos uploaded this week
+
+videos.forEach(function (clip) {
+  videoDate = clip.uploadDate.getDate();
+  videoMonth = clip.uploadDate.getMonth();
+  videoYear = clip.uploadDate.getFullYear();
+  if (thisMonth == videoMonth && thisYear == videoYear) {
+    if (today == videoDate || today - 2 == videoDate || today - 3 == videoDate || today - 4 == videoDate || today - 5 == videoDate || today - 6 == videoDate) {
+      console.log(clip.title);
+    }
+  }
+
+});
+console.log("");
+
 // Print titles of all videos uploaded this month
+videos.forEach(function (clip) {
+  videoDate = clip.uploadDate.getDate();
+  videoMonth = clip.uploadDate.getMonth();
+  videoYear = clip.uploadDate.getFullYear();
+  if (thisMonth == videoMonth && thisYear == videoYear) {
+    console.log(clip.title);
+  }
+
+});
+console.log("");
+
 // Print titles of all videos uploaded this year
+videos.forEach(function (clip) {
+  videoDate = clip.uploadDate.getDate();
+  videoMonth = clip.uploadDate.getMonth();
+  videoYear = clip.uploadDate.getFullYear();
+  if (thisYear == videoYear) {
+    console.log(clip.title);
+  }
+
+});
+console.log("");
 
 
 
